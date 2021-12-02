@@ -1,14 +1,13 @@
 var httpRequest = new XMLHttpRequest();
 var url = "http://localhost/info2180-finalproject/backend.php";
-var log= false;
 
 
 window.addEventListener("load", (e)=>{
     
-    
     var home= document.getElementById("homeButton");
     var addUser= document.getElementById("addUserButton");
     var login= document.getElementById("loginButton");
+    var logout= document.getElementById("logoutButton");
     var newIssue= document.getElementById("newIssueButton");
 
     home.addEventListener("click", (e)=>{
@@ -30,14 +29,21 @@ window.addEventListener("load", (e)=>{
     login.addEventListener("click", (e)=>{
         e.preventDefault();
         ajaxRequest("login");
+    });
 
-        if(log==false){
-            login.children[1].innerHTML = "Login";
-            log=true;
-        }else{
-            login.children[1].innerHTML = "Logout";
-            log=false;
-        }
+    logout.addEventListener("click", (e)=>{
+        e.preventDefault();
+        var h= document.getElementById('homeButton');
+        var a= document.getElementById('addUserButton');
+        var n= document.getElementById('newIssueButton');
+        var lo= document.getElementById('logoutButton');
+        var li= document.getElementById('loginButton');
+        h.classList.add('hide');
+        a.classList.add('hide');
+        n.classList.add('hide');
+        lo.classList.add('hide');
+        li.classList.remove('hide');
+        ajaxRequest("logout");
     });
 
 });
@@ -63,4 +69,34 @@ function ajaxRequest(query){
     httpRequest.open('Get', url, true);
     httpRequest.send();
     url = "http://localhost/info2180-finalproject/backend.php";
+}
+
+function mylogin(){
+    var emailv= document.getElementById("email").value;
+    var passv = document.getElementById("passcode").value;
+
+    if((emailv == "admin@project2.com") & (passv =="password123")){
+        var h= document.getElementById('homeButton');
+        var a= document.getElementById('addUserButton');
+        var n= document.getElementById('newIssueButton');
+        var lo= document.getElementById('logoutButton');
+        var li= document.getElementById('loginButton');
+        h.classList.remove('hide');
+        a.classList.remove('hide');
+        n.classList.remove('hide');
+        lo.classList.remove('hide');
+        li.classList.add('hide');
+        ajaxRequest("home");
+    }
+    else{
+        var h= document.getElementById('homeButton');
+        var n= document.getElementById('newIssueButton');
+        var lo= document.getElementById('logoutButton');
+        var li= document.getElementById('loginButton');
+        h.classList.remove('hide');
+        n.classList.remove('hide');
+        lo.classList.remove('hide');
+        li.classList.add('hide');
+        ajaxRequest("home"); 
+    }
 }
