@@ -14,27 +14,36 @@ if($page == "newIssue"){
         <form action="">
                     
             <label for="">Title</label>
-            <input type="text" name="title" id="titleFeild" required> 
+            <input type="text" name="title" id="titleField" required> 
     
             <label for="">Description</label>
-            <input type="text" name="description" id="descriptionFeild" required>
+            <input type="text" name="description" id="descriptionField" required>
     
             <label for="">Assign To</label>
-            <select required>
-                <option value="Marcia Brady">Marci Brady</option>
+            <select id="assigned" required>
+                <?php
+                  $connection = new mysqli('localhost','root','','bugme');
+                  $connection->set_charset('utf8mb4');
+                  $stmt = $connection->query("SELECT firstname, lastname FROM users");
+                ?>
+                <?php foreach ($stmt as $name): ?>
+                    <option><?= $name['firstname'].' '.$name['lastname']; ?></option>
+                <?php endforeach; ?>
             </select>
     
             <label for="">Type</label>
-            <select required>
+            <select id="type" required>
                 <option value="bug">Bug</option>
+                <option value="proposal">Proposal</option>
+                <option value="task">Task</option>
             </select>
 
             <label for="">Priority</label>
-            <select required>
+            <select id="pri" required>
                 <option value="Major">Major</option>
             </select>
     
-            <button type="submit" class="submit-issue">Submit</button>
+            <button type="button" class="submit-issue" onclick="createissue()">Submit</button>
         </form>
     </div>
 </div>
