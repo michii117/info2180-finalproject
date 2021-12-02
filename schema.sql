@@ -2,10 +2,6 @@ DROP DATABASE IF EXISTS bugme;
 CREATE DATABASE bugme;
 USE bugme;
 
---
--- Table structure for table `cities`
---
-
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(20) NOT NULL auto_increment,
