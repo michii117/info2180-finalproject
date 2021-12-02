@@ -94,11 +94,11 @@ if($page == "home"){
         </div>
                 
 
-        <div class="issuesSectionContainers">
+        <div class="issuesSectionContainers" id="issuesSectionContainers">
             <h3>Filter By:</h3>
-            <button id="filterAll" class="filterButtons">All</button>
-            <button id="filterOpen" class="filterButtons">Open</button>
-            <button id="filterTicket" class="filterButtons">My Tickets</button>
+            <button id="filterAll" class="filterButtons active" onclick="toggle()" >All</button>
+            <button id="filterOpen" class="filterButtons" onclick="toggle()">Open</button>
+            <button id="filterTicket" class="filterButtons" onclick="toggle()">My Tickets</button>
         </div>
         <div class="card"> 
         <table>
@@ -173,3 +173,5 @@ if($page == "logout"){
 <?php
 }
 ?>
+
+
