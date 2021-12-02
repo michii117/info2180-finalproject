@@ -3,6 +3,7 @@ header("Access-Control-Allow-Origin: *");
 
 $page= $_GET["query"];
 
+
 if($page == "newIssue"){
 
     ?>
@@ -56,7 +57,7 @@ if($page == "adduser"){
         <form id="newUsers-form" action="">
                     
             <label for="">First Name</label>
-            <input type="text" name="fisrtname" id="fisrtnameFeild" required> 
+            <input type="text" name="firstname" id="firstnameFeild" required> 
     
             <label for="">Last Name</label>
             <input type="text" name="lastname" id="lastnameFeild" required>
@@ -67,7 +68,7 @@ if($page == "adduser"){
             <label for="">Email</label>
             <input type="email" name="email" id="emailFeild" required>
     
-            <button type="submit" class="submit-users">Submit</button>
+            <button type="button" onclick="addusr()" class="submit-users">Submit</button>
         </form>
     </div>
 </div>
@@ -121,7 +122,7 @@ if($page == "home"){
         </table>
         </div>
        
-    </div>
+    </div> 
     </div>
 <?php
 }
@@ -132,13 +133,14 @@ if($page == "home"){
 <?php
 header("Access-Control-Allow-Origin: *");
 if($page == "login"){
+    session_start();
     
 ?>
 <div id="loginContainer" class="login-container" onclick="onclick">
                 <div class="top"></div>
                 <div class="bottom"></div>
                 <div class="center">
-                    <h2>Please Login</h2>
+                    <h2 class ="checker">Please Login</h2>
                     <form action = "" method = "post">
                         <input type="email" name="email"placeholder="Email" id="email"/>
                         <input type="password" name="password"placeholder="Password" id="passcode" />
@@ -154,6 +156,11 @@ if($page == "login"){
 <?php
 header("Access-Control-Allow-Origin: *");
 if($page == "logout"){
+    session_start();
+    unset($_SESSION['Loggedin']);
+    unset( $_SESSION['Email']);
+    unset($_SESSION['admin']);
+    session_destroy();
     $result='You have been successfully logged out.';
 ?>
 <div id="loginContainer" class="login-container" onclick="onclick">
@@ -173,3 +180,4 @@ if($page == "logout"){
 <?php
 }
 ?>
+
