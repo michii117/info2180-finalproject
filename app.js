@@ -30,9 +30,9 @@ window.addEventListener("load", (e)=>{
         e.preventDefault();
         if(sess == -1){
             ajaxRequest("login");
-        }else if (sess ==2){
-            loadadmin();
         }else if (sess ==1){
+            loadadmin();
+        }else if (sess >1){
             loaduser();
         }
         
@@ -40,6 +40,7 @@ window.addEventListener("load", (e)=>{
 
     logout.addEventListener("click", (e)=>{
         e.preventDefault();
+        sess = -1;
         var h= document.getElementById('homeButton');
         var a= document.getElementById('addUserButton');
         var n= document.getElementById('newIssueButton');
@@ -104,10 +105,10 @@ function mylogin(){
                             $(".center").prepend("Incorrect username or Password!");
                         }
                         d += 1;
-                    }else if(resp == 1){
+                    }else if(resp > 1){
                         loaduser();
                         d = 0;
-                    }else if(resp == 2){
+                    }else if(resp == 1){
                         loadadmin();
                         d = 0;
                     }

@@ -21,7 +21,7 @@ if($page == "newIssue"){
     
             <label for="">Assign To</label>
             <select required>
-                <option value="Marcia Brady">Marcia Brady</option>
+                <option value="Marcia Brady">Marci Brady</option>
             </select>
     
             <label for="">Type</label>
@@ -159,7 +159,7 @@ if($page == "logout"){
     session_start();
     unset($_SESSION['Loggedin']);
     unset( $_SESSION['Email']);
-    unset($_SESSION['admin']);
+    unset($_SESSION['id']);
     session_destroy();
     $result='You have been successfully logged out.';
 ?>

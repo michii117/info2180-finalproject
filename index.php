@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['Loggedin'])){
-       $adminst = $_SESSION['admin'];
+       $adminst = $_SESSION['id'];
     }else{
         $adminst = -1;
     }
