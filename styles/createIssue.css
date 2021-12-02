@@ -15,20 +15,32 @@ input, select{
 select{
     height: 45px;
 }
-
-button {
-
+.submit-issue{
     padding: 14px 30px;
     border: 0px;
-    filter: drop-shadow(0px 2px 3px #00000033);
     margin: 20px 0px 0px 0px;
     color: white;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.562);
     font-size: 18px;
     font-family: -apple-system,BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "NotoSans", sans-serif;
-    background-color: #000000;
+    background-color: black;
     cursor: pointer;
 }
 
 input#descriptionFeild {
-    height: 150px;
+    height: 130px;
+}
+
+.form1 {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    background-color: rgba(255, 255, 255, 0.637);
+    width: 70%;
+    margin-left: 190px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 30px;
+    padding-left: 60px;
+    padding-left: 290px;
 }
