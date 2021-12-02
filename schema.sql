@@ -20,7 +20,7 @@ CREATE TABLE `users` (
 LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`ID`, `firstname`, `lastname`, `password`, `email`, `date_joined`) VALUES
-(1, 'Lorem', 'Ipsum','482c811da5d5b4bc6d497ffa98491e38', 'admin@project2.com',  NOW());
+(1, 'Lorem', 'Ipsum', MD5('password123'), 'admin@project2.com',  NOW());
 
 UNLOCK TABLES;
 
