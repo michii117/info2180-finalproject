@@ -40,7 +40,9 @@ if($page == "newIssue"){
 
             <label for="">Priority</label>
             <select id="pri" required>
+                <option value="Critical">Critical</option>
                 <option value="Major">Major</option>
+                <option value="Minor">Minor</option>
             </select>
     
             <button type="button" class="submit-issue" onclick="createissue()">Submit</button>
