@@ -9,12 +9,14 @@ body{
 #main{
     grid-area: main;
     padding: 0px;
+    min-height: 882px;
+    max-height: 1200px;
 }
 
 
 #menu{
     grid-area: menu;
-    height: 701px;
+    height: 100%;
     background-color: #293545;
     margin: 0;
     padding: 19px;
@@ -95,5 +97,3 @@ ul {
     background-color: #000000;
     cursor: pointer;
 }
-
-

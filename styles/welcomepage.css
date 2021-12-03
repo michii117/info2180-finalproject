@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+ .welcome-wrapper {
+    grid-area:main;
+    background: #e1ebf8;
+    margin-top:10%;
+    margin-left:50%;
+    margin-bottom: 12%;
+    overflow: hidden;
+  }
+  
+ #w{
+    font-size: 120px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    margin-left: 50px;
+          transition-duration: 1s;
+          transition-timing-function: ease-in-put;
+  }
+ #w2{
+    font-size: 120px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    top: 35%;
+    left: 51%;
+          transition-duration: 1s;
+          transition-timing-function: ease-in-put;
+  }
+  
+  #log{
+    font-size: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bolder;
+    top: 60%;
+    left: 52%;
+          transition-duration: 1s;
+          transition-timing-function: ease-in-put;
+          font-weight: 200;
+      text-align: left;
+  }
+
+  .bg {
+    animation:slide 3s ease-in-out infinite alternate;
+    background-image: linear-gradient(-60deg, #6c3 50%, #09f 50%);
+    bottom:0;
+    left:-50%;
+    opacity:.5;
+    position:fixed;
+    right:-50%;
+    top:0;
+    z-index:-1;
+  }
+  
+  .bg2 {
+    animation-direction:alternate-reverse;
+    animation-duration:4s;
+  }
+  
+  .bg3 {
+    animation-duration:5s;
+  }
+  

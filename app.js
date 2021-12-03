@@ -16,7 +16,6 @@ window.addEventListener("load", (e)=>{
     });
 
     addUser.addEventListener("click", (e)=>{
-        e.preventDefault();
         ajaxRequest("adduser");
     });
 
@@ -119,10 +118,18 @@ function mylogin(){
     }
 }
 function loadadmin(){
+<<<<<<< Updated upstream
         var h= document.getElementById('homeButton');
         var a= document.getElementById('addUserButton');
         var n= document.getElementById('newIssueButton');
         var lo= document.getElementById('logoutButton');
+=======
+    var menu= document.getElementById('menu');
+        var h= document.getElementsByTagName('li')[0];
+        var a= document.getElementsByTagName('li')[1];
+        var n= document.getElementsByTagName('li')[2];
+        var lo= document.getElementsByTagName('li')[3];
+>>>>>>> Stashed changes
         var li= document.getElementById('loginButton');
         h.classList.remove('hide');
         a.classList.remove('hide');
@@ -132,9 +139,16 @@ function loadadmin(){
         ajaxRequest("home");
 }
 function loaduser(){
+<<<<<<< Updated upstream
     var h= document.getElementById('homeButton');
         var n= document.getElementById('newIssueButton');
         var lo= document.getElementById('logoutButton');
+=======
+    var menu= document.getElementById('menu');
+    var h= document.getElementsByTagName('li')[0];
+        var n= document.getElementsByTagName('li')[2];
+        var lo= document.getElementsByTagName('li')[3];
+>>>>>>> Stashed changes
         var li= document.getElementById('loginButton');
         h.classList.remove('hide');
         n.classList.remove('hide');

@@ -1,11 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
  *, *:before, *:after {
 	 box-sizing: border-box;
-}
+ }
  .login-container {
+	grid-area: main;
 	 position: absolute;
+<<<<<<< Updated upstream
 	 width: 83%;
+=======
+	 width: 100%;
+>>>>>>> Stashed changes
 	 height: 92%;
+	right: 0%;
 	 overflow: hidden;
 }
  .login-container:hover .top:before, .login-container:active .top:before, .login-container:hover .bottom:before, .login-container:active .bottom:before, .login-container:hover .top:after, .login-container:active .top:after, .login-container:hover .bottom:after, .login-container:active .bottom:after {
@@ -78,7 +84,7 @@
     font-weight: bolder;
     font-size: 40px;
 }
-.btn{
+.btn {
     background-color: #171d2b;
     margin-top: 5px;
     margin-left: 8px;
