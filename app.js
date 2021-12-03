@@ -1,6 +1,7 @@
 var httpRequest = new XMLHttpRequest();
 var url = "http://localhost/info2180-finalproject/backend.php";
 let d = 0;
+var mytarget;
 
 window.addEventListener("load", (e)=>{
     
@@ -14,6 +15,7 @@ window.addEventListener("load", (e)=>{
     home.addEventListener("click", (e)=>{
         e.preventDefault();
         ajaxRequest("home");
+       
     });
 
     addUser.addEventListener("click", (e)=>{
@@ -26,6 +28,8 @@ window.addEventListener("load", (e)=>{
         ajaxRequest("newIssue");
     });
 
+    
+    
 
     login.addEventListener("click", (e)=>{
         menu.classList.add('hide');
@@ -111,6 +115,7 @@ function mylogin(){
                 success: function(response){
                     console.log(response);
                     resp = response;//0 -not logged in, 1- normal user, 2 - admin
+                    mytarget = resp;
                     if(resp == 0){
                         console.log("nope")
                         $(".menu").hide();
@@ -132,6 +137,7 @@ function mylogin(){
                 dataType: 'text'
             }
         );
+
     }
 }
 function loadadmin(){

@@ -2,6 +2,7 @@
     session_start();
     if(isset($_SESSION['Loggedin'])){
        $adminst = $_SESSION['id'];
+
     }else{
         $adminst = -1;
     }
@@ -55,7 +56,7 @@
     
     </div>
 <script>
-    var sess = <?php echo $adminst;?>;
+    var sess = <?php echo $adminst?>;
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="app.js"></script>

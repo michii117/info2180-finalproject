@@ -1,69 +1,40 @@
 
-function filteruserTickets(){
-    var myissuebtn = document.getElementById("filterTicket");
-	myissuebtn.addEventListener("click", function (e) {
-		var hrequest = new XMLHttpRequest();
-		var urlcode = "usertickets.php";
-		hrequest.onreadystatechange = function () {
-			if (hrequest.readyState == XMLHttpRequest.DONE) {
-				if (hrequest.status == 200) {
-					var issue = hrequest.responseText;
-					var result = document.getElementById("result");
-					result.innerHTML = issue;
-				} else {
-					alert("Error Detected");
-				}
-			}
-		};
-
-		hrequest.open("GET", urlcode, true);
-		hrequest.send();
-	});
-}
-
 function filterOpen(){
+	filterAll();
+	var inp = document.getElementsByClassName("In-Progress");
+	var inc = document.getElementsByClassName("Closed");
+	for(i=0;i<inp.length; i++)
+	{
+		
+		inp[i].classList.add("hide");
+	}
+	for(i=0;i<inc.length; i++)
+	{
+		inc[i].classList.add("hide");
+	}
 
-    var openissuebtn = document.getElementById("filterOpen");
-	openissuebtn.addEventListener("click", function (e) {
-		var hrequest = new XMLHttpRequest();
-		var urlcode = "openissuesonly.php";
-		hrequest.onreadystatechange = function () {
-			if (hrequest.readyState == XMLHttpRequest.DONE) {
-				if (hrequest.status == 200) {
-					var issue = hrequest.responseText;
-					var result = document.getElementById("result");
-					result.innerHTML = issue;
-				} else {
-					alert("Error Detected");
-				}
-			}
-		};
-
-		hrequest.open("GET", urlcode, true);
-		hrequest.send();
-	});
 }
 
-function filterALL(){
-
-    var all= document.getElementById("filterAll");
-	all.addEventListener("click", function (e) {
-		var hrequest = new XMLHttpRequest();
-		var urlcode = "Allfilter.php";
-		hrequest.onreadystatechange = function () {
-			if (hrequest.readyState == XMLHttpRequest.DONE) {
-				if (hrequest.status == 200) {
-					var issue = hrequest.responseText;
-					var result = document.getElementById("result");
-					result.innerHTML = issue;
-				} else {
-					alert("Error Detected");
-				}
-			}
-		};
-
-		hrequest.open("GET", urlcode, true);
-		hrequest.send();
-	});
+function filterAll()
+{
+	var inp = document.getElementsByClassName("table");
+	for(i=0;i<inp.length; i++)
+	{
+		
+		inp[i].classList.remove("hide");
+	}
 }
-    
+
+function filterUserticket()
+ {
+	filterAll();
+	 var tab = document.getElementsByClassName("table");
+	 for(i=0;i<tab.length;i++)
+	 {
+		 if(!tab[i].classList.contains(mytarget))
+		 {
+			 tab[i].classList.add('hide');
+		 }
+	 }
+	
+ }

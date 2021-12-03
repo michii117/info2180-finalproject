@@ -1,5 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+session_start();
+
 
 $page= $_GET["query"];
 
@@ -98,6 +100,7 @@ header("Access-Control-Allow-Origin: *");
 if($page == "home"){
 
     ?>
+    
     <div class="d-container">
     <div id="issues">
         <div class="issuesSectionContainers">
@@ -108,9 +111,9 @@ if($page == "home"){
 
         <div class="issuesSectionContainers">
             <h3>Filter By:</h3>
-            <button id="filterAll" class="filterButtons active" onclick="filteruserTickets()">All</button>
-            <button id="filterOpen" class="filterButtons"onclick="filterOpen()">Open</button>
-            <button id="filterTicket" class="filterButtons"onclick="filterALL()">My Tickets</button>
+            <button id="filterAll" class="filterButtons active" onclick="filterAll()">All</button>
+            <button id="filterOpen" class="filterButtons" onclick="filterOpen()">Open</button>
+            <button id="filterTicket" class="filterButtons" onclick="filterUserticket()" >My Tickets</button>
         </div>
         <div class="card"> 
         <div id="result"></div>
@@ -127,16 +130,21 @@ if($page == "home"){
                   $connection->set_charset('utf8mb4');
                   $stm = $connection->query("SELECT * FROM issues");
                 ?>
-            <?php foreach ($stm as $iss): ?>
-                <tr> 
+            <?php foreach ($stm as $iss):
+                $idno = $iss['assigned_to'];
+                $names = $connection->query("SELECT firstname, lastname FROM users WHERE id = $idno");
+                $res = $names->fetch_assoc();
+                $stat = $iss['status']; ?>
+                <tr class= "<?php echo $stat?> <?php echo $idno ?> table"> 
                     <td>
                         <p id="p" style="display:inline-block;">#<?php echo  $iss['id']?></p>
                         <button id="<?php echo $iss['id']?>" class="vb"><?= $iss['title']; ?></button>
                     </td>
                 <td><?= $iss['type']; ?></td>
                 <td><?= $iss['status']; ?><p class= "priorityColour"></p</td>
-                <td><?= $iss['assigned_to'];?></td>
+                <td><?= $res['firstname']." ".$res['lastname']?></td>
                 <td><?= $iss['created'];?></td>
+            </tr>  
             </tr>  
             <?php endforeach; ?>
          
@@ -145,15 +153,13 @@ if($page == "home"){
        <div id="results"></div>
     </div> 
     </div>
-<?php
+    <?php
 }
 ?>
 
 
 <?php
-header("Access-Control-Allow-Origin: *");
 if($page == "login"){
-    session_start();
     
 ?>
 <div id="loginContainer" class="login-container" onclick="onclick">
@@ -174,9 +180,7 @@ if($page == "login"){
 ?>
 
 <?php
-header("Access-Control-Allow-Origin: *");
 if($page == "logout"){
-    session_start();
     unset($_SESSION['Loggedin']);
     unset( $_SESSION['Email']);
     unset($_SESSION['id']);
