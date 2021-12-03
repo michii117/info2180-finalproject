@@ -1,11 +1,14 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 
 $page= $_GET["query"];
 
 if($page == "newIssue"){
 
     ?>
+    <div class="form1">
     <h1>Create Issue</h1>
+    
     <div>
         <form action="">
                     
@@ -30,9 +33,10 @@ if($page == "newIssue"){
                 <option value="Major">Major</option>
             </select>
     
-            <button type="submit">Submit</button>
+            <button type="submit" class="submit-issue">Submit</button>
         </form>
     </div>
+</div>
 <?php
 }
 
@@ -40,16 +44,19 @@ if($page == "newIssue"){
 
 
 <?php
+header("Access-Control-Allow-Origin: *");
 
 if($page == "adduser"){
 
     ?>
-    <div id= "newUser">
-    <h1>New User</h1>
-    <form action="">
+    <div class="container">
+    <div class="form">
+    <div id= "newUser" >
+        <h1>New User</h1>
+        <form id="newUsers-form" action="">
                     
-        <label for="">First Name</label>
-        <input type="text" name="fisrtname" id="fisrtnameFeild" required> 
+            <label for="">First Name</label>
+            <input type="text" name="fisrtname" id="fisrtnameFeild" required> 
     
             <label for="">Last Name</label>
             <input type="text" name="lastname" id="lastnameFeild" required>
@@ -60,26 +67,25 @@ if($page == "adduser"){
             <label for="">Email</label>
             <input type="email" name="email" id="emailFeild" required>
     
-            <button type="submit">Submit</button>
+            <button type="submit" class="submit-users">Submit</button>
         </form>
     </div>
+</div>
+</div>
 <?php
 }
 
 ?>
-
-
-
-
 <?php
-
-if($page == "issue"){
+header("Access-Control-Allow-Origin: *");
+if($page == "home"){
 
     ?>
+    <div class="container">
     <div id="issues">
         <div class="issuesSectionContainers">
             <h1>Issues</h1>
-            <button id="newIssueButton">Create New Issue</button>
+            <button id="newIssueBtn">Create New Issue</button>
         </div>
                 
 
@@ -89,8 +95,8 @@ if($page == "issue"){
             <button id="filterOpen" class="filterButtons">Open</button>
             <button id="filterTicket" class="filterButtons">My Tickets</button>
         </div>
-
-        <table>
+        <div class="card"> 
+        <table id="issuestable">
             <tr>
                 <th>Title</th>
                 <th>Type</th>
@@ -98,17 +104,25 @@ if($page == "issue"){
                 <th>Assigned To</th>
                 <th>Created</th>
             </tr>
-
+            <?php
+                  $connection = new mysqli('localhost','root','','bugme');
+                  $connection->set_charset('utf8mb4');
+                  $stm = $connection->query("SELECT * FROM issues");
+                ?>
+            <?php foreach ($stm as $iss): ?>
             <tr>
-                <td>bdsvnjk</td>
-                <td>hbdvncxj</td>
-                <td>bhvdsjn</td>
-                <td><p class= "priorityColour">dnv</p> </td>
-                <td>biwencs</td>
-            </tr>
-
+                <td><button id="<?php echo $iss['id']?>" class="viewIssueButtons">#<?= $iss['id']; ?> <?= $iss['title']; ?></button></td>
+                <td><?= $iss['type']; ?></td>
+                <td><?= $iss['status']; ?><p class= "priorityColour"></p></td>
+                <td><?= $iss['assigned_to'];?></td>
+                <td><?= $iss['created'];?></td>
+            </tr>  
+            <?php endforeach; ?>
+         
         </table>
-
+        </div>
+       
+    </div> 
     </div>
 <?php
 }
@@ -116,25 +130,48 @@ if($page == "issue"){
 ?>
 
 
+
 <?php
-
+header("Access-Control-Allow-Origin: *");
 if($page == "login"){
-
-    ?>
-<div id="loginContainer">
-    <h1>Login</h1>
-    <form action="">
-                                
-        <label for="">Password</label>
-        <input type="password" name="password" id="passwordFeild" required>
-                
-        <label for="">Email</label>
-        <input type="email" name="email" id="emailFeild" required>
-                
-        <button type="submit">Login</button>
-    </form>
+    
+?>
+<div id="loginContainer" class="login-container" onclick="onclick">
+                <div class="top"></div>
+                <div class="bottom"></div>
+                <div class="center">
+                    <h2>Please Login</h2>
+                    <form action = "" method = "post">
+                        <input type="email" name="email"placeholder="Email" id="email"/>
+                        <input type="password" name="password"placeholder="Password" id="passcode" />
+                        <button  class="btn" id="btn" type="button" onclick="mylogin()" name="Login">Login</button>
+                        <h2>&nbsp;</h2>
+                 </form>
+                </div>
 </div>
 <?php
 }
+?>
 
+<?php
+header("Access-Control-Allow-Origin: *");
+if($page == "logout"){
+    $result='You have been successfully logged out.';
+?>
+<div id="loginContainer" class="login-container" onclick="onclick">
+                <div class="top"></div>
+                <div class="bottom"></div>
+                <div class="center">
+                    <h2>Please Login</h2>
+                    <?php echo $result; ?>
+                    <form action = "" method = "post">
+                        <input type="email" name="email"placeholder="Email" id="email"/>
+                        <input type="password" name="password"placeholder="Password" id="passcode" />
+                        <button  class="btn" id="btn" type="button" onclick="mylogin()" name="Login">Login</button>
+                        <h2>&nbsp;</h2>
+                 </form>
+                </div>
+</div>
+<?php
+}
 ?>

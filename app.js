@@ -1,19 +1,19 @@
 var httpRequest = new XMLHttpRequest();
 var url = "http://localhost/info2180-finalproject/backend.php";
-var log= false;
 
 
 window.addEventListener("load", (e)=>{
     
-    
     var home= document.getElementById("homeButton");
     var addUser= document.getElementById("addUserButton");
     var login= document.getElementById("loginButton");
+    var logout= document.getElementById("logoutButton");
     var newIssue= document.getElementById("newIssueButton");
 
     home.addEventListener("click", (e)=>{
         e.preventDefault();
         ajaxRequest("home");
+       
     });
 
     addUser.addEventListener("click", (e)=>{
@@ -30,16 +30,23 @@ window.addEventListener("load", (e)=>{
     login.addEventListener("click", (e)=>{
         e.preventDefault();
         ajaxRequest("login");
-
-        if(log==false){
-            login.children[1].innerHTML = "Login";
-            log=true;
-        }else{
-            login.children[1].innerHTML = "Logout";
-            log=false;
-        }
     });
-    //loadvjPage();
+
+    logout.addEventListener("click", (e)=>{
+        e.preventDefault();
+        var h= document.getElementById('homeButton');
+        var a= document.getElementById('addUserButton');
+        var n= document.getElementById('newIssueButton');
+        var lo= document.getElementById('logoutButton');
+        var li= document.getElementById('loginButton');
+        h.classList.add('hide');
+        a.classList.add('hide');
+        n.classList.add('hide');
+        lo.classList.add('hide');
+        li.classList.remove('hide');
+        ajaxRequest("logout");
+    });
+   
 });
 
 function ajaxRequest(query){
@@ -49,6 +56,11 @@ function ajaxRequest(query){
                 var response = httpRequest.responseText;
                 var resultdiv= document.getElementById("main");
                 resultdiv.innerHTML=response;
+                 if(query=="home"){
+                    var issbuttons=document.getElementsByClassName("viewIssueButtons");
+                    //console.log(issbuttons.length);
+                    loadvjPage(issbuttons);
+                }
                 
             } else {
                 alert('There was a problem with the request.');
@@ -58,11 +70,54 @@ function ajaxRequest(query){
 
     url= url + "?query=" + query;
 
-    console.log(url);
+    //console.log(url);
 
     httpRequest.open('Get', url, true);
     httpRequest.send();
     url = "http://localhost/info2180-finalproject/backend.php";
+
+}
+
+function mylogin(){
+    var emailv= document.getElementById("email").value;
+    var passv = document.getElementById("passcode").value;
+
+    if((emailv == "admin@project2.com") & (passv =="password123")){
+        var h= document.getElementById('homeButton');
+        var a= document.getElementById('addUserButton');
+        var n= document.getElementById('newIssueButton');
+        var lo= document.getElementById('logoutButton');
+        var li= document.getElementById('loginButton');
+        h.classList.remove('hide');
+        a.classList.remove('hide');
+        n.classList.remove('hide');
+        lo.classList.remove('hide');
+        li.classList.add('hide');
+        ajaxRequest("home");
+    }
+    else{
+        var h= document.getElementById('homeButton');
+        var n= document.getElementById('newIssueButton');
+        var lo= document.getElementById('logoutButton');
+        var li= document.getElementById('loginButton');
+        h.classList.remove('hide');
+        n.classList.remove('hide');
+        lo.classList.remove('hide');
+        li.classList.add('hide');
+        ajaxRequest("home"); 
+    }
+}
+
+function toggle(){
+    var btnContainer = document.getElementById('issuesSectionContainers');
+    var btns = btnContainer.getElementsByClassName('filterButtons');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function(){
+            var current = document.getElementsByClassName('active');
+            current[0].className = current[0].className.replace('active', ' ');
+            this.className += ' active';
+        });
+        }
 }
 
 //View job details functions
@@ -84,10 +139,21 @@ function initvjpage(mcbutton,mipbutton){ // adds event listeners to the viewjobd
         changeStatus("In-Progress",issueid);
     });//mip event listener
 }
-function loadvjPage(){ //should have issueid as a parameter
+function loadvjPage(buttons){ //should have issueid as a parameter
     //load page will be the event listener for whatever options are clicked.
     // get id from somewhere
-    vjajaxRequest(issueid,"issid");
+    //var issueid=1;
+    //console.log(buttons.length);
+    for(i=0;i<buttons.length;i++){
+        //console.log(buttons[i].id);
+        buttons[i].addEventListener('click',function(event){
+            event.preventDefault();
+            var issueid=event.target.id;
+            console.log(event.target.id);
+            vjajaxRequest(issueid,"issid");
+        });
+    }
+  
 
 }
 function changeStatus(stat,issueid){
@@ -120,7 +186,17 @@ function vjajaxRequest(query,param){
                 var mcbutton=document.getElementById("vjclosedbutton");
                 var mipbutton=document.getElementById('vjipbutton');
                 
-                initvjpage(mcbutton,mipbutton);
+                //initvjpage(mcbutton,mipbutton);
+                     mcbutton.addEventListener("click",function(event){
+            event.preventDefault();
+            console.log("MC");
+            changeStatus("Closed",query);//changed from issueid
+        });//mc event listener
+        mipbutton.addEventListener("click",function(event){
+            event.preventDefault();
+            console.log("MIP");
+            changeStatus("In-Progress",query); //changed from issueid
+    });//mip event listener
             } else {
                 alert('There was a problem with the request.');
             }
