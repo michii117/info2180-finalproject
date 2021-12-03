@@ -63,6 +63,11 @@ function ajaxRequest(query){
                 var response = httpRequest.responseText;
                 var resultdiv= document.getElementById("main");
                 resultdiv.innerHTML=response;
+                if(query=="home"){
+                    var issbuttons=document.getElementsByClassName("viewIssueButtons");
+                     //console.log(issbuttons.length);
+                    loadvjPage(issbuttons);
+                }
                 
             } else {
                 alert('There was a problem with the request.');
@@ -165,4 +170,110 @@ function addusr(){
             dataType: 'text'
         }
     );
+}
+
+
+function toggle(){
+    var btnContainer = document.getElementById('issuesSectionContainers');
+    var btns = btnContainer.getElementsByClassName('filterButtons');
+    for (var i = 0; i < btns.length; i++) {	
+        btns[i].addEventListener('click', function(){
+            var current = document.getElementsByClassName('active');
+            current[0].className = current[0].className.replace('active', ' ');
+            this.className += ' active';
+
+         });
+    }
+}
+
+//View job details functions
+//var issueid=1;
+var url2 = "http://localhost/info2180-finalproject/viewjob.php";
+
+
+function initvjpage(mcbutton,mipbutton){ // adds event listeners to the viewjobdetails page
+    //unable to acess elements made in php
+    
+    mcbutton.addEventListener("click",function(event){
+        event.preventDefault();
+        console.log("MC");
+        changeStatus("Closed",issueid);
+    });//mc event listener
+    mipbutton.addEventListener("click",function(event){
+        event.preventDefault();
+        console.log("MIP");
+        changeStatus("In-Progress",issueid);
+    });//mip event listener
+}
+function loadvjPage(buttons){ //should have issueid as a parameter
+    //load page will be the event listener for whatever options are clicked.
+    // get id from somewhere
+    //var issueid=1;
+    //console.log(buttons.length);
+    for(i=0;i<buttons.length;i++){
+        //console.log(buttons[i].id);
+        buttons[i].addEventListener('click',function(event){
+            event.preventDefault();
+            var issueid=event.target.id;
+            console.log(event.target.id);
+            vjajaxRequest(issueid,"issid");
+        });
+    }
+  
+
+}
+function changeStatus(stat,issueid){
+     httpRequest.onreadystatechange = function(){
+        if (httpRequest.readyState === XMLHttpRequest.DONE){
+            if (httpRequest.status === 200) {              
+                vjajaxRequest(issueid,"issid");  
+                //location.reload();              
+            } else {
+                alert('There was a problem with the request.');
+            }
+        } 
+    }
+    staturl="http://localhost/info2180-finalproject/viewjob.php";
+
+    staturl= staturl+ "?issid="+issueid+"&status="+stat;
+
+    httpRequest.open('Get', staturl, true);
+    httpRequest.send();
+    
+}
+
+function vjajaxRequest(query,param){
+    httpRequest.onreadystatechange = function(){
+        if (httpRequest.readyState === XMLHttpRequest.DONE){
+            if (httpRequest.status === 200) {
+                var response = httpRequest.responseText;
+                var resultdiv= document.getElementById("main");
+                resultdiv.innerHTML=response;
+                var mcbutton=document.getElementById("vjclosedbutton");
+                var mipbutton=document.getElementById('vjipbutton');
+                
+                //initvjpage(mcbutton,mipbutton);
+                     mcbutton.addEventListener("click",function(event){
+            event.preventDefault();
+            console.log("MC");
+            changeStatus("Closed",query);//changed from issueid
+        });//mc event listener
+        mipbutton.addEventListener("click",function(event){
+            event.preventDefault();
+            console.log("MIP");
+            changeStatus("In-Progress",query); //changed from issueid
+    });//mip event listener
+            } else {
+                alert('There was a problem with the request.');
+            }
+        } 
+    }
+
+    url2= url2 + "?"+param+"=" + query;
+
+    //console.log(url2);
+
+    httpRequest.open('Get', url2, true);
+    httpRequest.send();
+    url2 = "http://localhost/info2180-finalproject/viewjob.php";
 }

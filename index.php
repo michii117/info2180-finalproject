@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="styles/viewIssues.css">
     <link rel="stylesheet" href="styles/login-out.css">
     <link rel="stylesheet" href="styles/addUser.css">
+    <link rel="stylesheet" href="styles/Dashboard.css">
 
     <title>Document</title>
 </head>

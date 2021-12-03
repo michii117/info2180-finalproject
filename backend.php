@@ -102,7 +102,7 @@ if($page == "home"){
     <div id="issues">
         <div class="issuesSectionContainers">
             <h1>Issues</h1>
-            <button id="newIssueBtn">Create New Issue</button>
+            <button id="newIssueBtn" onclick="ajaxRequest('newIssue')" >Create New Issue</button>
         </div>
                 
 
@@ -113,7 +113,7 @@ if($page == "home"){
             <button id="filterTicket" class="filterButtons">My Tickets</button>
         </div>
         <div class="card"> 
-        <table>
+        <table id="issuestable">
             <tr>
                 <th>Title</th>
                 <th>Type</th>
@@ -127,8 +127,8 @@ if($page == "home"){
                   $stm = $connection->query("SELECT * FROM issues");
                 ?>
             <?php foreach ($stm as $iss): ?>
-            <tr button id="issuebuttons">
-                <td><?= $iss['title']; ?></td>
+            <tr> <td><button id="<?php echo $iss['id']?>" class="viewIssueButtons">
+            #<?= $iss['id']; ?> <?= $iss['title']; ?></button></td>
                 <td><?= $iss['type']; ?></td>
                 <td><?= $iss['status']; ?><p class= "priorityColour"></p</td>
                 <td><?= $iss['assigned_to'];?></td>
