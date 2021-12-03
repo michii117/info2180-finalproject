@@ -121,15 +121,21 @@ if($page == "home"){
                 <th>Assigned To</th>
                 <th>Created</th>
             </tr>
-
-            <tr>
-                <td>bdsvnjk</td>
-                <td>hbdvncxj</td>
-                <td>bhvdsjn</td>
-                <td><p class= "priorityColour">dnv</p> </td>
-                <td>biwencs</td>
-            </tr>
-
+            <?php
+                  $connection = new mysqli('localhost','root','','bugme');
+                  $connection->set_charset('utf8mb4');
+                  $stm = $connection->query("SELECT * FROM issues");
+                ?>
+            <?php foreach ($stm as $iss): ?>
+            <tr button id="issuebuttons">
+                <td><?= $iss['title']; ?></td>
+                <td><?= $iss['type']; ?></td>
+                <td><?= $iss['status']; ?><p class= "priorityColour"></p</td>
+                <td><?= $iss['assigned_to'];?></td>
+                <td><?= $iss['created'];?></td>
+            </tr>  
+            <?php endforeach; ?>
+         
         </table>
         </div>
        
