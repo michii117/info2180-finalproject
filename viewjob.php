@@ -73,9 +73,11 @@ if (isset($_GET['issid']))
 	function changeStatus($conn){ 
 	$status= filter_input(INPUT_GET,"status",FILTER_SANITIZE_STRING);
 	$issid= filter_input(INPUT_GET,"issid",FILTER_SANITIZE_STRING);
+	date_default_timezone_set('Jamaica');
+	$date=date('Y-m-d H:i:s');
 	if(isset($_GET['status']) && isset($_GET['issid'])){
-		$stmt = $conn->prepare("UPDATE issues SET status=? WHERE id=?");
-		$stmt->execute([$status,$issid]);
+		$stmt = $conn->prepare("UPDATE issues SET status=?, updated=? WHERE id=?");
+		$stmt->execute([$status,$date,$issid]);
 
 	}
 }
