@@ -188,6 +188,7 @@ function loadadmin(){
 function loaduser(){
     var menu= document.getElementById('menu');
     var h= document.getElementById('homeButton');
+    var grid = document.getElementById('main');
         var n= document.getElementById('newIssueButton');
         var lo= document.getElementById('logoutButton');
         var li= document.getElementById('loginButton');
