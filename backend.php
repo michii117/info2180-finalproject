@@ -143,7 +143,7 @@ if($page == "home"){
                         <button id="<?php echo $iss['id']?>" class="vb"><?= $iss['title']; ?></button>
                     </td>
                 <td><?= $iss['type']; ?></td>
-                <td><?= $iss['status']; ?><p class= "priorityColour"></p</td>
+                <td><a class= 'pretty <?php echo $stat?>s'><?= $iss['status']; ?></a**></td>
                 <td><?= $res['firstname']." ".$res['lastname']?></td>
                 <td><?= $iss['created'];?></td>
             </tr>  
