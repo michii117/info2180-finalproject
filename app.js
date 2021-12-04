@@ -1,5 +1,5 @@
 var httpRequest = new XMLHttpRequest();
-var url = "http://localhost/info2180-finalproject/backend.php";
+var url = "backend.php";
 let d = 0;
 var mytarget;
 var adduval = false;
@@ -118,7 +118,7 @@ function ajaxRequest(query){
 
     httpRequest.open('Get', url, true);
     httpRequest.send();
-    url = "http://localhost/info2180-finalproject/backend.php";
+    url = "backend.php";
 }
 
 function mylogin(){
@@ -239,7 +239,7 @@ function toggle(){
 
 //View job details functions
 //var issueid=1;
-var url2 = "http://localhost/info2180-finalproject/viewjob.php";
+var url2 = "viewjob.php";
 
 
 function initvjpage(mcbutton,mipbutton){ // adds event listeners to the viewjobdetails page
@@ -284,7 +284,7 @@ function changeStatus(stat,issueid){
             }
         } 
     }
-    staturl="http://localhost/info2180-finalproject/viewjob.php";
+    staturl="viewjob.php";
 
     staturl= staturl+ "?issid="+issueid+"&status="+stat;
 
@@ -326,7 +326,7 @@ function vjajaxRequest(query,param){
 
     httpRequest.open('Get', url2, true);
     httpRequest.send();
-    url2 = "http://localhost/info2180-finalproject/viewjob.php";
+    url2 = "viewjob.php";
 }
 
 function passvalidation(p){
