@@ -1,7 +1,9 @@
 var httpRequest = new XMLHttpRequest();
 var url = "http://localhost/info2180-finalproject/backend.php";
 let d = 0;
-
+var mytarget;
+var adduval = false;
+var addival = false;
 window.addEventListener("load", (e)=>{
     
     var menu= document.getElementById('menu');
@@ -26,6 +28,8 @@ window.addEventListener("load", (e)=>{
         ajaxRequest("newIssue");
     });
 
+    
+    
 
     login.addEventListener("click", (e)=>{
         menu.classList.add('hide');
@@ -72,6 +76,34 @@ function ajaxRequest(query){
                     var issbuttons=document.getElementsByClassName("vb");
                      //console.log(issbuttons.length);
                     loadvjPage(issbuttons);
+                }else if(query=="adduser"){
+                    var submitusr = document.getElementsByClassName("submit-users")[0];
+                    fnamever = document.getElementById("firstnameFeild");
+                    lnamever = document.getElementById("lastnameFeild");
+                    passver = document.getElementById("passwordFeild");
+                    emailver = document.getElementById("emailFeild");
+                    
+                    $(passver).keyup(function(){
+                        passvalidation(passver);
+                    })
+                    submitusr.addEventListener("click",(e)=>{
+                        var usv = [fnamever.checkValidity(),lnamever.checkValidity(),emailver.checkValidity()]
+                        if(adduval && usv.every(element=> element == true)){
+                            addusr()
+                        }
+                       
+                    })
+                }else if(query == "newIssue"){
+                    tver = document.getElementById("titleField");
+                    descver = document.getElementById("descriptionField");
+                    
+                    var submitiss = document.getElementsByClassName("submit-issue")[0];
+                    submitiss.addEventListener("click", (e)=>{
+                        var niv = [tver.checkValidity(),descver.checkValidity()];
+                        if(niv.every(element=> element == true)){
+                            createissue();
+                        }
+                    });
                 }
             } else {
                 alert('There was a problem with the request.');
@@ -111,6 +143,7 @@ function mylogin(){
                 success: function(response){
                     console.log(response);
                     resp = response;//0 -not logged in, 1- normal user, 2 - admin
+                    mytarget = resp;
                     if(resp == 0){
                         console.log("nope")
                         $(".menu").hide();
@@ -132,6 +165,7 @@ function mylogin(){
                 dataType: 'text'
             }
         );
+
     }
 }
 function loadadmin(){
@@ -141,12 +175,14 @@ function loadadmin(){
         var n= document.getElementById('newIssueButton');
         var lo= document.getElementById('logoutButton');
         var li= document.getElementById('loginButton');
+        var grid = document.getElementById('main');
         h.classList.remove('hide');
         a.classList.remove('hide');
         n.classList.remove('hide');
         lo.classList.remove('hide');
         li.classList.add('hide');
         menu.classList.remove('hide');
+        grid.classList.remove('main2');
         ajaxRequest("home");
 }
 function loaduser(){
@@ -160,8 +196,10 @@ function loaduser(){
         lo.classList.remove('hide');
         li.classList.add('hide');
         menu.classList.remove('hide');
+        grid.classList.remove('main2');
         ajaxRequest("home"); 
 }
+
 
 function addusr(){
     var usrfname = document.getElementById('firstnameFeild');
@@ -185,20 +223,6 @@ function addusr(){
             dataType: 'text'
         }
     );
-}
-
-
-function toggle(){
-    var btnContainer = document.getElementById('issuesSectionContainers');
-    var btns = btnContainer.getElementsByClassName('filterButtons');
-    for (var i = 0; i < btns.length; i++) {	
-        btns[i].addEventListener('click', function(){
-            var current = document.getElementsByClassName('active');
-            current[0].className = current[0].className.replace('active', ' ');
-            this.className += ' active';
-
-         });
-    }
 }
 
 //View job details functions
@@ -292,3 +316,65 @@ function vjajaxRequest(query,param){
     httpRequest.send();
     url2 = "http://localhost/info2180-finalproject/viewjob.php";
 }
+
+function passvalidation(p){
+    console.log(p.value.length)
+    if (p.value.length < 8) {
+        p.setCustomValidity("Your password must be at least 8 characters");
+        p.reportValidity("Your password must be at least 8 characters");
+        adduval = false;
+    }else if (p.value.search(/[a-z]/i) < 0) {
+        p.setCustomValidity("Your password must contain at least one common letter.");
+        p.reportValidity("Your password must contain at least one common letter.");
+        adduval = false;
+    }else if (/[A-Z]/.test(p.value)== false) {
+        p.setCustomValidity("Your password must contain at least one upper case letter.");
+        p.reportValidity("Your password must contain at least one upper case letter.");
+        adduval = false;
+    }
+    else if (p.value.search(/[0-9]/) < 0) {
+        p.setCustomValidity("Your password must contain at least one digit.");
+        p.reportValidity("Your password must contain at least one digit.");
+        adduval = false;
+    }else{
+        p.setCustomValidity("");
+    adduval = true;
+    }
+    
+} 
+function createissue()
+    {
+        var title = document.getElementById("titleField").value;
+        var description = document.getElementById("descriptionField").value;
+        var assignto = document.getElementById("assigned").value;
+        var type = document.getElementById("type").value;
+        var priority = document.getElementById("pri").value;
+        var status = "Open";
+        $.ajax(
+            {
+                url: 'createissue.php',
+                method: 'POST',
+                data:{
+                    cissue:1,
+                    ti:title,
+                    des:description,
+                    assi: assignto,
+                    typ: type,
+                    pri: priority,
+                    sta: status,
+                },
+                success: function(response){
+                    alert(response);
+                },
+                dataType: 'text'
+            }
+        );
+    }  
+    function statusColour(){
+        var status= document.getElementsByClassName("priorityColour");
+        for(k=0;k<status.length;i++){
+            if(status[k].value == 'Open'){
+                status[k].classList.add('openstat');
+            }
+        }
+     }

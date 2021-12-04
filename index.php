@@ -2,6 +2,7 @@
     session_start();
     if(isset($_SESSION['Loggedin'])){
        $adminst = $_SESSION['id'];
+
     }else{
         $adminst = -1;
     }
@@ -44,18 +45,23 @@
             </ul>
         </menu>
     
-        <main id="main">
-        <div class="welcome-wrapper">
-                <div class="w-container"> 
+        <main id="main" class="main2">
+        <div id="picture">
+        <div class="floating" style="height: 50px; width: 50px; ">
+                <img src="images/bug.png" id="png" style="width:350px;height:350px;">
+        </div>
+        </div>
+        <div id="headings">
                     <h1 id="w">WELCOME</h1>
-                    <h1 id="w2">BACK</h1>
+                    <h1 id="w2" >BACK</h1>
                     <P id="log"> BugMe Issue Tracker is a issue tracking webapp that helps you to track and fix bugs quickly.  Please Login to continue.</P>
-            <div>    
+            <div>
+            </div>
         </main>
-    
-    </div>
+</div>
+
 <script>
-    var sess = <?php echo $adminst;?>;
+    var sess = <?php echo $adminst?>;
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="app.js"></script>

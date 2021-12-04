@@ -1,5 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+session_start();
+
 
 $page= $_GET["query"];
 
@@ -45,7 +47,7 @@ if($page == "newIssue"){
                 <option value="Minor">Minor</option>
             </select>
     
-            <button type="button" class="submit-issue" onclick="createissue()">Submit</button>
+            <button type="button" class="submit-issue" >Submit</button>
         </form>
     </div>
 </div>
@@ -61,7 +63,7 @@ header("Access-Control-Allow-Origin: *");
 if($page == "adduser"){
 
     ?>
-    <div class="container">
+    <div class="container" >
     <div class="form">
     <div id= "newUser" >
         <h1>New User</h1>
@@ -74,16 +76,18 @@ if($page == "adduser"){
             <input type="text" name="lastname" id="lastnameFeild" required>
     
             <label for="">Password</label>
-            <input type="text" name="password" id="passwordFeild" required>
+            <input type="text" minlength="8" name="password"  id="passwordFeild" required>
     
             <label for="">Email</label>
             <input type="email" name="email" id="emailFeild" required>
+            
     
-            <button type="button" onclick="addusr()" class="submit-users">Submit</button>
+            <button type="button"  class="submit-users">Submit</button>
         </form>
     </div>
 </div>
 </div>
+
 <?php
 }
 
@@ -98,6 +102,7 @@ header("Access-Control-Allow-Origin: *");
 if($page == "home"){
 
     ?>
+    
     <div class="d-container">
     <div id="issues">
         <div class="issuesSectionContainers">
@@ -108,9 +113,9 @@ if($page == "home"){
 
         <div class="issuesSectionContainers">
             <h3>Filter By:</h3>
-            <button id="filterAll" class="filterButtons active" onclick="filteruserTickets()">All</button>
-            <button id="filterOpen" class="filterButtons"onclick="filterOpen()">Open</button>
-            <button id="filterTicket" class="filterButtons"onclick="filterALL()">My Tickets</button>
+            <button id="filterAll" class="filterButtons active" onclick="filterAll(); ">All</button>
+            <button id="filterOpen" class="filterButtons" onclick="filterOpen(); ">Open</button>
+            <button id="filterTicket" class="filterButtons" onclick="filterUserticket();" >My Tickets</button>
         </div>
         <div class="card"> 
         <div id="result"></div>
@@ -127,16 +132,21 @@ if($page == "home"){
                   $connection->set_charset('utf8mb4');
                   $stm = $connection->query("SELECT * FROM issues");
                 ?>
-            <?php foreach ($stm as $iss): ?>
-                <tr> 
+            <?php foreach ($stm as $iss):
+                $idno = $iss['assigned_to'];
+                $names = $connection->query("SELECT firstname, lastname FROM users WHERE id = $idno");
+                $res = $names->fetch_assoc();
+                $stat = $iss['status']; ?>
+                <tr class= "<?php echo $stat?> <?php echo $idno ?> table"> 
                     <td>
                         <p id="p" style="display:inline-block;">#<?php echo  $iss['id']?></p>
                         <button id="<?php echo $iss['id']?>" class="vb"><?= $iss['title']; ?></button>
                     </td>
                 <td><?= $iss['type']; ?></td>
                 <td><?= $iss['status']; ?><p class= "priorityColour"></p</td>
-                <td><?= $iss['assigned_to'];?></td>
+                <td><?= $res['firstname']." ".$res['lastname']?></td>
                 <td><?= $iss['created'];?></td>
+            </tr>  
             </tr>  
             <?php endforeach; ?>
          
@@ -145,15 +155,13 @@ if($page == "home"){
        <div id="results"></div>
     </div> 
     </div>
-<?php
+    <?php
 }
 ?>
 
 
 <?php
-header("Access-Control-Allow-Origin: *");
 if($page == "login"){
-    session_start();
     
 ?>
 <div id="loginContainer" class="login-container" onclick="onclick">
@@ -174,9 +182,7 @@ if($page == "login"){
 ?>
 
 <?php
-header("Access-Control-Allow-Origin: *");
 if($page == "logout"){
-    session_start();
     unset($_SESSION['Loggedin']);
     unset( $_SESSION['Email']);
     unset($_SESSION['id']);
