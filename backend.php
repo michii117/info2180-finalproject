@@ -47,7 +47,7 @@ if($page == "newIssue"){
                 <option value="Minor">Minor</option>
             </select>
     
-            <button type="button" class="submit-issue" onclick="createissue()">Submit</button>
+            <button type="button" class="submit-issue" >Submit</button>
         </form>
     </div>
 </div>

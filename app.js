@@ -94,6 +94,17 @@ function ajaxRequest(query){
                         }
                        
                     })
+                }else if(query == "newIssue"){
+                    tver = document.getElementById("titleField");
+                    descver = document.getElementById("descriptionField");
+                    
+                    var submitiss = document.getElementsByClassName("submit-issue")[0];
+                    submitiss.addEventListener("click", (e)=>{
+                        var niv = [tver.checkValidity(),descver.checkValidity()];
+                        if(niv.every(element=> element == true)){
+                            createissue();
+                        }
+                    });
                 }
             } else {
                 alert('There was a problem with the request.');
@@ -342,6 +353,32 @@ function passvalidation(p){
     adduval = true;
     }
     
-}
-
-function validate(q){}
+} 
+function createissue()
+    {
+        var title = document.getElementById("titleField").value;
+        var description = document.getElementById("descriptionField").value;
+        var assignto = document.getElementById("assigned").value;
+        var type = document.getElementById("type").value;
+        var priority = document.getElementById("pri").value;
+        var status = "Open";
+        $.ajax(
+            {
+                url: 'createissue.php',
+                method: 'POST',
+                data:{
+                    cissue:1,
+                    ti:title,
+                    des:description,
+                    assi: assignto,
+                    typ: type,
+                    pri: priority,
+                    sta: status,
+                },
+                success: function(response){
+                    alert(response);
+                },
+                dataType: 'text'
+            }
+        );
+    }   
