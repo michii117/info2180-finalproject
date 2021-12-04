@@ -8,10 +8,10 @@ CREATE TABLE `users` (
   `firstname` varchar(64) NOT NULL ,
   `lastname` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL ,
-  `email` varchar(64) NOT NULL ,
+  `email` varchar(64) NOT NULL UNIQUE,
   `date_joined` DATETIME NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4080 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 LOCK TABLES `users` WRITE;
 
@@ -33,4 +33,4 @@ CREATE TABLE `issues` (
   `created` DATETIME NOT NULL,
   `updated` DATETIME NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4080 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

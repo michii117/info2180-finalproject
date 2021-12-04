@@ -1,4 +1,5 @@
-.contaner{
+.d-contaner{
+    grid-area: main;
     margin: 0 auto;
     max-width: 960px;
     width: 100%;
@@ -38,6 +39,15 @@
     color: black;
     border-style: none;
 }
+.filterButtons:hover {
+    background-color: #44545c73;
+    color: white;
+  }
+
+.active {
+    background-color: #1d6ccc;
+    color: white;
+  }
 
 div#issues {
     display: inline-block;
@@ -76,8 +86,55 @@ td{
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
     background-color: white;
-    width: 190%;
+    width: 1300px;
     margin-left: 43px;
     align-content: center;
      margin-bottom: 50px;
   }
+
+  .vb{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+    padding-bottom: 1px;
+  }
+  #p{
+      font-weight: bolder;
+      padding-left:5px;
+      padding-bottom: 13px;
+      align-content: center;
+  }
+
+  .openstat {
+	align-self: center;
+	background-color: #48bb78;
+	border-radius: 3px;
+	color: white;
+	text-align: center;
+	width: 120px;
+}
+.progstatus{
+    background-color: #fcc204;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    width: 120px;
+    height: 30px;
+    text-transform: uppercase;
+}
+
+.closestatus{
+    background-color: #fc6704;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    width: 120px;
+    text-transform: uppercase;
+}
+

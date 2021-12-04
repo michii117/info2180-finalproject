@@ -8,7 +8,14 @@ body{
 
 #main{
     grid-area: main;
-    padding: 0px;
+
+}
+.main2{
+    grid-area: main;
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: auto auto;
+    grid-template-areas: 'pic welcome';
 }
 
 
@@ -79,7 +86,7 @@ ul {
     width: 40px;
 }
 
-/* menu hidden*/
+/* Hide Menu Elements*/
 .hide{
     display: none;
  }
@@ -96,4 +103,6 @@ ul {
     cursor: pointer;
 }
 
-
+input:invalid {
+    background-color: pink;
+  }

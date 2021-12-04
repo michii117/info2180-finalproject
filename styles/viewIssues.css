@@ -1,0 +1,118 @@
+p{
+    margin-top: 3%;
+    padding-bottom: 5px;
+}
+ul{
+    margin-top: 5%;
+}
+h4{
+    padding-top: 5px;
+}
+
+#viewjob {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 'vjheadings vjheadings vjheadings vjheadings'
+                         'vjmain  vjmain  vjmain  vjaddinfo'
+                         'vjmain  vjmain  vjmain  vjbuttonarea';
+}
+
+#vjheadings {
+    grid-area: vjheadings;
+}
+
+#vjheadings > h1 {
+    margin-top: 30px;
+    margin-bottom: 0;
+    margin-left: 5%;
+    font-size: 50px;
+}
+
+#vjheadings > h4 {
+    margin-top: 20px;
+    margin-left: 5%;
+    font-size: 20px;
+}
+
+#vjaddinfo h4 {
+    margin: 0px;
+}
+
+#vjaddinfos p {
+    margin-bottom: 20px;
+}
+
+#vjbuttonarea {
+    grid-area: vjbuttonarea;
+    padding: 10px;
+    margin-right: 12%;
+    margin-left: 8%;
+}
+
+
+#vjmain {
+    grid-area: vjmain;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#vjmain * li {
+    margin-top: 3px;
+    margin-left: 40px;
+    list-style: disclosure-closed;
+}
+
+#vjaddinfo {
+    grid-area: vjaddinfo;
+    padding: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
+    background-color: #171d2b74;
+    border-radius: 10px;;
+}
+
+#vjbuttonarea button {
+    width: 108%;
+    margin-bottom:5px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.vjbuttonc {
+    background-color: #1d6ccc;
+}
+
+.vjbuttoni {
+    background-color: #3B7403;
+}
+
+.openstatus {
+	align-self: center;
+	background-color: #48bb78;
+	border-radius: 3px;
+	color: white;
+	text-align: center;
+	width: 120px;
+}
+.progstatus{
+    background-color: #fcc204;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    width: 120px;
+    height: 30px;
+    text-transform: uppercase;
+}
+
+.closestatus{
+    background-color: #fc6704;
+    border-radius: 3px;
+    color: white;
+    text-align: center;
+    width: 120px;
+    text-transform: uppercase;
+}
+
