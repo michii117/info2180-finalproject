@@ -9,7 +9,7 @@ CREATE TABLE `users` (
   `firstname` varchar(64) NOT NULL ,
   `lastname` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL ,
-  `email` varchar(64) NOT NULL ,
+  `email` varchar(64) NOT NULL UNIQUE,
   `date_joined` DATETIME NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;

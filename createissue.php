@@ -18,8 +18,8 @@
     $sql = "INSERT INTO `issues` (`id`,`title`, `description`, `type`, `priority`, `status`,`assigned_to`,`created_by`,`created`,`updated`) 
                             VALUES (NULL, '$title', '$descpri', '$type', '$priority', '$status',$idnos,$createdby,NOW(),NOW())";
     if (mysqli_query($connection, $sql)) {
-        exit( "New record created successfully");
+        exit( "New issue created successfully!");
       } else {
-        exit("Error: " . $sql . "<br>" . mysqli_error($connection));
+        exit("Error adding issue! Details: " . $sql . mysqli_error($connection));
       }
 ?>

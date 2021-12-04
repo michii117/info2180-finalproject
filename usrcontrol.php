@@ -8,10 +8,12 @@
         $pass = htmlentities($_POST['password'],ENT_QUOTES, 'UTF-8');
     }
     $sql = "INSERT INTO `users` (`ID`, `firstname`, `lastname`, `password`, `email`, `date_joined`) VALUES (NULL, '$fname', '$lname', MD5('$pass'), '$email',  NOW())";
-    
-    if (mysqli_query($connection, $sql)) {
-        exit( "New record created successfully");
-      } else {
-        exit("Error: " . $sql . "<br>" . mysqli_error($connection));
+    $errnum = mysqli_query($connection, $sql);
+    if ($errnum) {
+        exit( "User added Successfully!");
+      } else if(mysqli_errno($connection) == 1062) {
+        exit("Email already registered!");
+      }else{
+        exit("Error adding user!");
       }
 ?>
