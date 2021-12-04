@@ -2,7 +2,8 @@ var httpRequest = new XMLHttpRequest();
 var url = "http://localhost/info2180-finalproject/backend.php";
 let d = 0;
 var mytarget;
-
+var adduval = false;
+var addival = false;
 window.addEventListener("load", (e)=>{
     
     var menu= document.getElementById('menu');
@@ -76,6 +77,23 @@ function ajaxRequest(query){
                     var issbuttons=document.getElementsByClassName("vb");
                      //console.log(issbuttons.length);
                     loadvjPage(issbuttons);
+                }else if(query=="adduser"){
+                    var submitusr = document.getElementsByClassName("submit-users")[0];
+                    fnamever = document.getElementById("firstnameFeild");
+                    lnamever = document.getElementById("lastnameFeild");
+                    passver = document.getElementById("passwordFeild");
+                    emailver = document.getElementById("emailFeild");
+                    
+                    $(passver).keyup(function(){
+                        passvalidation(passver);
+                    })
+                    submitusr.addEventListener("click",(e)=>{
+                        var usv = [fnamever.checkValidity(),lnamever.checkValidity(),emailver.checkValidity()]
+                        if(adduval && usv.every(element=> element == true)){
+                            addusr()
+                        }
+                       
+                    })
                 }
             } else {
                 alert('There was a problem with the request.');
@@ -168,6 +186,7 @@ function loaduser(){
         menu.classList.remove('hide');
         ajaxRequest("home"); 
 }
+
 
 function addusr(){
     var usrfname = document.getElementById('firstnameFeild');
@@ -298,3 +317,31 @@ function vjajaxRequest(query,param){
     httpRequest.send();
     url2 = "http://localhost/info2180-finalproject/viewjob.php";
 }
+
+function passvalidation(p){
+    console.log(p.value.length)
+    if (p.value.length < 8) {
+        p.setCustomValidity("Your password must be at least 8 characters");
+        p.reportValidity("Your password must be at least 8 characters");
+        adduval = false;
+    }else if (p.value.search(/[a-z]/i) < 0) {
+        p.setCustomValidity("Your password must contain at least one common letter.");
+        p.reportValidity("Your password must contain at least one common letter.");
+        adduval = false;
+    }else if (/[A-Z]/.test(p.value)== false) {
+        p.setCustomValidity("Your password must contain at least one upper case letter.");
+        p.reportValidity("Your password must contain at least one upper case letter.");
+        adduval = false;
+    }
+    else if (p.value.search(/[0-9]/) < 0) {
+        p.setCustomValidity("Your password must contain at least one digit.");
+        p.reportValidity("Your password must contain at least one digit.");
+        adduval = false;
+    }else{
+        p.setCustomValidity("");
+    adduval = true;
+    }
+    
+}
+
+function validate(q){}

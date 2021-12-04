@@ -63,7 +63,7 @@ header("Access-Control-Allow-Origin: *");
 if($page == "adduser"){
 
     ?>
-    <div class="container">
+    <div class="container" >
     <div class="form">
     <div id= "newUser" >
         <h1>New User</h1>
@@ -76,16 +76,18 @@ if($page == "adduser"){
             <input type="text" name="lastname" id="lastnameFeild" required>
     
             <label for="">Password</label>
-            <input type="text" name="password" id="passwordFeild" required>
+            <input type="text" minlength="8" name="password"  id="passwordFeild" required>
     
             <label for="">Email</label>
             <input type="email" name="email" id="emailFeild" required>
+            
     
-            <button type="button" onclick="addusr()" class="submit-users">Submit</button>
+            <button type="button"  class="submit-users">Submit</button>
         </form>
     </div>
 </div>
 </div>
+
 <?php
 }
 

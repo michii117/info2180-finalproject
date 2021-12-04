@@ -96,4 +96,6 @@ ul {
     cursor: pointer;
 }
 
-
+input:invalid {
+    background-color: pink;
+  }
